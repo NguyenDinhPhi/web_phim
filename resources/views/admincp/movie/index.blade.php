@@ -12,6 +12,7 @@
                   <th scope="col">Tên phim</th>
                   <th scope="col">Hình ảnh</th>
                   <th scope="col">Phim hot</th>
+                  <th scope="col">Định dạng</th>
                   <!-- <th scope="col">Mô tả</th> -->
                   <th scope="col">Đường dẫn</th>
                   <th scope="col">Trạng thái</th>
@@ -32,6 +33,19 @@
                         Không
                     @else
                         Có
+                    @endif
+                  </td>
+                  <td>
+                    @if($cate->resolution==0)
+                        HD
+                    @elseif($cate->resolution==1)
+                        SD
+                    @elseif($cate->resolution==2)
+                        HDCam
+                    @elseif($cate->resolution==3)
+                        Cam
+                    @else
+                        FullHD
                     @endif
                   </td>
                   <!-- <td>{{$cate->description}}</td> -->
