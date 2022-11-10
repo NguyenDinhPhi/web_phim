@@ -7,6 +7,7 @@ use App\Models\Movie;
 use App\Models\Category;
 use App\Models\Genre;
 use App\Models\Country;
+use Carbon\Carbon;
 class MovieController extends Controller
 {
     /**
@@ -54,6 +55,8 @@ class MovieController extends Controller
         $movie->category_id = $data['category_id'];
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
+        $movie->ngaytao = Carbon::now('Asia/Ho_Chi_Minh');
+        $movie->ngaycapnhat = Carbon::now('Asia/Ho_Chi_Minh');
 
         $get_image = $request->file('image');
 
@@ -117,7 +120,7 @@ class MovieController extends Controller
         $movie->category_id = $data['category_id'];
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
-
+        $movie->ngaycapnhat = Carbon::now('Asia/Ho_Chi_Minh');
         $get_image = $request->file('image');
 
         if($get_image){
