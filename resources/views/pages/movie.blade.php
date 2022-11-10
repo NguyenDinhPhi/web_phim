@@ -52,7 +52,13 @@
                                     @else
                                           FullHD
                                     @endif
-                                 </span><span class="episode">Vietsub</span></li>
+                                 </span><span class="episode">
+                                    @if($movie->phude==0)
+                                 Phụ đề
+                                 @else
+                                       Thuyết minh
+                                 @endif
+                                 </span></li>
                                  
                                  <li class="list-info-group-item"><span>Thời lượng</span> : 133 Phút</li>
                                  <li class="list-info-group-item"><span>Thể loại</span> : 
@@ -96,7 +102,25 @@
                            <div class="halim-item">
                               <a class="halim-thumb" href="{{route('movie',$hot->slug)}}" title="{{$hot->title}}">
                                  <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$hot->image)}}" alt="{{$hot->title}}" title="Đại Thánh Vô Song"></figure>
-                                 <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
+                                 <span class="status">
+                                    @if($hot->resolution==0)
+                                          HD
+                                    @elseif($hot->resolution==1)
+                                          SD
+                                    @elseif($hot->resolution==2)
+                                          HDCam
+                                    @elseif($hot->resolution==3)
+                                          Cam
+                                    @else
+                                          FullHD
+                                    @endif
+                                 </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                                    @if($hot->phude==0)
+                                    Phụ đề
+                                    @else
+                                          Thuyết minh
+                                    @endif
+                                 </span> 
                                  <div class="icon_overlay"></div>
                                  <div class="halim-post-title-box">
                                     <div class="halim-post-title ">

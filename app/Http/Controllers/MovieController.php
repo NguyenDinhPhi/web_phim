@@ -45,6 +45,7 @@ class MovieController extends Controller
         $movie = new Movie();
         $movie->title = $data['title'];
         $movie->resolution = $data['resolution'];
+        $movie->phude = $data['phude'];
         $movie->slug = $data['slug'];
         $movie->name_eng = $data['name_eng'];
         $movie->phim_hot = $data['phim_hot'];
@@ -106,6 +107,7 @@ class MovieController extends Controller
         $data = $request->all();
         $movie = Movie::find($id);
         $movie->resolution = $data['resolution'];
+        $movie->phude = $data['phude'];
         $movie->title = $data['title'];
         $movie->slug = $data['slug'];
         $movie->name_eng = $data['name_eng'];
@@ -119,15 +121,16 @@ class MovieController extends Controller
         $get_image = $request->file('image');
 
         if($get_image){
-            if(!empty($movie->image)){
+            if(file_exists('uploads/movie/'.$movie->image)){
                 unlink('uploads/movie/'.$movie->image);
+            }else{
+                $get_name_image = $get_image->getClientOriginalName();
+                $name_image = current(explode('.',$get_name_image));
+                $new_image = $name_image.rand(0,9999).'.'.$get_image->getClientOriginalExtension();
+                $get_image->move('uploads/movie/',$new_image);
+                $movie->image = $new_image;
+                }
             }
-            $get_name_image = $get_image->getClientOriginalName();
-            $name_image = current(explode('.',$get_name_image));
-            $new_image = $name_image.rand(0,9999).'.'.$get_image->getClientOriginalExtension();
-            $get_image->move('uploads/movie/',$new_image);
-            $movie->image = $new_image;
-        }
         $movie->save();
         return redirect()->back();
     }
@@ -141,7 +144,7 @@ class MovieController extends Controller
     public function destroy($id)
     {
         $movie = Movie::find($id);
-        if(!empty($movie->image)){
+        if(file_exists('uploads/movie/'.$movie->image)){
             unlink('uploads/movie/'.$movie->image);
         }
         $movie->delete();
