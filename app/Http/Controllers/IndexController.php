@@ -29,6 +29,15 @@ class IndexController extends Controller
         $movie = Movie::where('category_id',$cate_slug->id)->orderBy('ngaycapnhat','DESC')->paginate(40);
     	return view('pages.category', compact('category','genre','country','cate_slug','movie'));
     }
+    public function year($year){
+        $category = Category::orderBy('position','ASC')->where('status',1)->get();
+        $genre = Genre::orderBy('id','DESC')->get();
+        $country = Country::orderBy('id','DESC')->get();
+
+        $year = $year;
+        $movie = Movie::where('year',$year)->orderBy('ngaycapnhat','DESC')->paginate(40);
+    	return view('pages.year', compact('category','genre','country','year','movie'));
+    }
     public function genre($slug){
         $category = Category::orderBy('position','ASC')->where('status',1)->get();
         $genre = Genre::orderBy('id','DESC')->get();

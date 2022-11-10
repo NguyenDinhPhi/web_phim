@@ -92,6 +92,20 @@
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
+        $('.select-year').change(function(){
+            var year = $(this).find(':selected').val();
+            var id_phim =$(this).attr('id');
+            $.ajax({
+                url:"{{url('/update-year-phim')}}",
+                method:"GET",
+                data:{year:year,id_phim:id_phim},
+                success:function(){
+                    alert('thay đổi phim theo năm '+year+' thành công');
+                }
+            })
+        })
+    </script>
+    <script type="text/javascript">
     $(document).ready( function () {
         $('#tablephim').DataTable();
     } );
@@ -128,7 +142,7 @@
             document.getElementById('convert_slug').value = slug;
         }
 
-    </script>
+    </>
     <script type="text/javascript">
         $('.order_position').sortable({
             placeholder : 'ui-state-highlight',

@@ -20,7 +20,12 @@ class MovieController extends Controller
         $list = Movie::with('category','genre','country')->orderBy('id','DESC')->get();
         return view('admincp.movie.index', compact('list'));
     }
-
+    public function update_year(Request $request){
+        $data = $request->all();
+        $movie = Movie::find($data['id_phim']);
+        $movie->year = $data['year'];
+        $movie->save();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -45,6 +50,7 @@ class MovieController extends Controller
         $data = $request->all();
         $movie = new Movie();
         $movie->title = $data['title'];
+        $movie->thoiluong = $data['thoiluong'];
         $movie->resolution = $data['resolution'];
         $movie->phude = $data['phude'];
         $movie->slug = $data['slug'];
@@ -110,6 +116,7 @@ class MovieController extends Controller
         $data = $request->all();
         $movie = Movie::find($id);
         $movie->resolution = $data['resolution'];
+        $movie->thoiluong = $data['thoiluong'];
         $movie->phude = $data['phude'];
         $movie->title = $data['title'];
         $movie->slug = $data['slug'];

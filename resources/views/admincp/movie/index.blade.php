@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <a href="{{route('movie.create')}}" class="btn btn-primary">Thêm Phim</a>
@@ -10,6 +10,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Tên phim</th>
+                  <th scope="col">Thời lượng phim</th>
                   <th scope="col">Hình ảnh</th>
                   <th scope="col">Phim hot</th>
                   <th scope="col">Định dạng</th>
@@ -22,6 +23,7 @@
                   <th scope="col">Quốc gia</th>
                   <th scope="col">Ngày tạo</th>
                   <th scope="col">Ngày cập nhật</th>
+                  <th scope="col">Năm phim</th>
                   <th scope="col">Quản lý</th>
                 </tr>
               </thead>
@@ -30,6 +32,7 @@
                 <tr>
                   <th scope="row">{{$key}}</th>
                   <td>{{$cate->title}}</td>
+                  <td>{{$cate->thoiluong}}</td>
                   <td><img width="100" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
                   <td>
                     @if($cate->phim_hot==0)
@@ -72,6 +75,9 @@
                   <td>{{$cate->country->title}}</td>
                   <td>{{$cate->ngaytao}}</td>
                   <td>{{$cate->ngaycapnhat}}</td>
+                  <td>
+                    {!!Form::selectYear('year',2000,2022, isset($cate->year) ? $cate->year : '',['class'=>'select-year','id'=>$cate->id])!!}
+                  </td>
                   <td>
                       {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc muốn xóa?")']) !!}
                         {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
