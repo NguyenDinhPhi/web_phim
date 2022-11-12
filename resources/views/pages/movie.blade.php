@@ -89,6 +89,27 @@
                            </article>
                         </div>
                      </div>
+                     {{-- tags phim --}}
+                     <div class="section-bar clearfix">
+                        <h2 class="section-title"><span style="color:#ffed4d">Tags Phim</span></h2>
+                     </div>
+                     <div class="entry-content htmlwrap clearfix">
+                        <div class="video-item halim-entry-box">
+                           <article id="post-38424" class="item-content">
+                              @if($movie->tags!=NULL)
+                                 @php
+                                 $tags = array();
+                                 $tags = explode(',' , $movie->tags);
+                                 @endphp
+                                 @foreach($tags as $key => $tag)
+                                 <a href="{{url('tag/' .$tag)}}">{{$tag}}</a>
+                                 @endforeach
+                              @else
+                              {{$movie->title}}
+                              @endif
+                           </article>
+                        </div>
+                     </div>
                   </div>
                </section>
                <section class="related-movies">
@@ -142,6 +163,7 @@
                   </div>
                </section>
             </main>
-            <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4"></aside>
+            @include('pages.include.sidebar')
          </div>
+         
 @endsection
