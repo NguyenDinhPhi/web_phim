@@ -8,7 +8,7 @@
       <meta content="VN" name="geo.region" />
       <meta name="DC.language" scheme="utf-8" content="vi" />
       <meta name="language" content="Việt Nam">
-      
+      <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
       <link rel="shortcut icon" href="https://www.pngkey.com/png/detail/360-3601772_your-logo-here-your-company-logo-here-png.png" type="image/x-icon" />
       <meta name="revisit-after" content="1 days" />
@@ -168,7 +168,42 @@
      
       <script type='text/javascript' src='{{asset('js/halimtheme-core.min.js?ver=1626273138')}}' id='halim-init-js'></script>
       
-     
+      <script type="text/javascript">
+         $(document).ready(function(){
+            $.ajax({
+               url:"{{url('/filter-topview-default')}}",
+               method:"GET",
+               
+               success:function(data){
+                     $('#show_data_default').html(data);
+                 }
+            });
+         
+
+         $('.filter-sidebar').click(function(){
+             var href = $(this).attr('href');
+             if(href=='#ngay'){
+                 var value = 0;
+             }else if(href=='#tuan'){
+                 var value = 1;
+             }else{
+                 var value = 2;
+             }
+             $.ajax({
+                 url:"{{url('/filter-topview-phim')}}",
+                 method:"POST",
+                 data:{value:value},
+                 headers:{
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                 success:function(data){
+                     $('#halim-ajax-popular-post-default').css('display','none');
+                     $('#show_data').html(data);
+                 }
+             });
+         })
+      })
+     </script>
      
    
       <style>#overlay_mb{position:fixed;display:none;width:100%;height:100%;top:0;left:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.7);z-index:99999;cursor:pointer}#overlay_mb .overlay_mb_content{position:relative;height:100%}.overlay_mb_block{display:inline-block;position:relative}#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:600px;height:auto;position:relative;left:50%;top:50%;transform:translate(-50%, -50%);text-align:center}#overlay_mb .overlay_mb_content .cls_ov{color:#fff;text-align:center;cursor:pointer;position:absolute;top:5px;right:5px;z-index:999999;font-size:14px;padding:4px 10px;border:1px solid #aeaeae;background-color:rgba(0, 0, 0, 0.7)}#overlay_mb img{position:relative;z-index:999}@media only screen and (max-width: 768px){#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:400px;top:3%;transform:translate(-50%, 3%)}}@media only screen and (max-width: 400px){#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:310px;top:3%;transform:translate(-50%, 3%)}}</style>
