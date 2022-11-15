@@ -28,37 +28,47 @@
                         </div>
                         <div class="movie_info col-xs-12">
                            <div class="movie-poster col-md-3">
-                              <img class="movie-thumb" src="{{asset('uploads/movie/'.$movie->image)}}" alt="GÓA PHỤ ĐEN">
-                              <div class="bwa-content">
-                                 <div class="loader"></div>
-                                 <a href="{{route('watch')}}" class="bwac-btn">
-                                 <i class="fa fa-play"></i>
-                                 </a>
-                              </div>
+                              <img class="movie-thumb" src="{{asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->title}}">
+                              @if($movie->resolution!=5)
+                                 <div class="bwa-content">
+                                    <div class="loader"></div>
+                                    <a href="{{route('watch')}}" class="bwac-btn">
+                                    <i class="fa fa-play"></i>
+                                    </a>
+                                 </div>
+                              @else
+                              <a href="#watch_trailer"  style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer </a>
+                              @endif
                            </div>
                            <div class="film-poster col-md-9">
                               <h1 class="movie-title title-1" style="display:block;line-height:35px;margin-bottom: -14px;color: #ffed4d;text-transform: uppercase;font-size: 18px;">{{$movie->title}}</h1>
                               <h2 class="movie-title title-2" style="font-size: 12px;">{{$movie->name_eng}}</h2>
                               <ul class="list-info-group">
                                  <li class="list-info-group-item"><span>Trạng Thái</span> : <span class="quality">
-                                    @if( $movie->resolution==0)
-                                          HD
-                                    @elseif( $movie->resolution==1)
-                                          SD
-                                    @elseif($movie->resolution==2)
-                                          HDCam
-                                    @elseif($movie->resolution==3)
-                                          Cam
-                                    @else
-                                          FullHD
-                                    @endif
-                                 </span><span class="episode">
-                                    @if($movie->phude==0)
-                                 Phụ đề
+                                    @if($movie->resolution==0)
+                                       HD
+                                 @elseif($movie->resolution==1)
+                                       SD
+                                 @elseif($movie->resolution==2)
+                                       HDCam
+                                 @elseif($movie->resolution==3)
+                                       Cam
+                                 @elseif($movie->resolution==4)
+                                       FullHD
                                  @else
-                                       Thuyết minh
+                                       Trailer
                                  @endif
-                                 </span></li>
+                                 </span>
+                                 @if($movie->resolution!=5)
+                                    <span class="episode">
+                                       @if($movie->phude==0)
+                                          Phụ đề
+                                       @else
+                                          Thuyết minh
+                                       @endif
+                                    </span>
+                                 @endif
+                              </li>
                                  
                                  <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->thoiluong}}</li>
                                  @if($movie->season!=0)
@@ -113,6 +123,19 @@
                            </article>
                         </div>
                      </div>
+                     <div class="section-bar clearfix">
+                        <h2 class="section-title"><span style="color:#ffed4d">Trailer Phim</span></h2>
+                     </div>
+                     <div class="entry-content htmlwrap clearfix">
+                        <div class="video-item halim-entry-box">
+                           <article id="watch_trailer" class="item-content">
+                              <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{$movie->trailer}}" 
+                              title="YouTube video player" 
+                              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                              allowfullscreen></iframe>
+                           </article>
+                        </div>
+                     </div>
                   </div>
                </section>
                <section class="related-movies">
@@ -128,15 +151,17 @@
                                  <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$hot->image)}}" alt="{{$hot->title}}" title="Đại Thánh Vô Song"></figure>
                                  <span class="status">
                                     @if($hot->resolution==0)
-                                          HD
+                                       HD
                                     @elseif($hot->resolution==1)
                                           SD
                                     @elseif($hot->resolution==2)
                                           HDCam
                                     @elseif($hot->resolution==3)
                                           Cam
-                                    @else
+                                    @elseif($hot->resolution==4)
                                           FullHD
+                                    @else
+                                          Trailer
                                     @endif
                                  </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
                                     @if($hot->phude==0)

@@ -44,15 +44,21 @@ class MovieController extends Controller
         $output = '';
         foreach($movie as $key => $mov){
             if($mov->resolution==0){   
-                    $text ="HD";
+                $text ="HD";
             }elseif( $mov->resolution==1){
                 $text ="SD";
             }    
-            elseif($movie->resolution==2){
+            elseif($mov->resolution==2){
                 $text ="HDCam";
             }
-            else{
+            elseif($mov->resolution==3){
                 $text ="Cam";
+            }
+            elseif($mov->resolution==4){
+                $text ="FullHD";
+            }
+            else{
+                $text ="Trailer";
             }
         $output.='<div class="item">
             <a href="'.url('phim/'.$mov->slug).'" title="'.$mov->title.'">
@@ -85,11 +91,17 @@ class MovieController extends Controller
             }elseif( $mov->resolution==1){
                 $text ="SD";
             }    
-            elseif($movie->resolution==2){
+            elseif($mov->resolution==2){
                 $text ="HDCam";
             }
-            else{
+            elseif($mov->resolution==3){
                 $text ="Cam";
+            }
+            elseif($mov->resolution==4){
+                $text ="FullHD";
+            }
+            else{
+                $text ="Trailer";
             }
         $output.='<div class="item">
             <a href="'.url('phim/'.$mov->slug).'" title="'.$mov->title.'">
@@ -135,6 +147,7 @@ class MovieController extends Controller
         $data = $request->all();
         $movie = new Movie();
         $movie->title = $data['title'];
+        $movie->trailer = $data['trailer'];
         $movie->tags = $data['tags'];
         $movie->thoiluong = $data['thoiluong'];
         $movie->resolution = $data['resolution'];
@@ -203,6 +216,7 @@ class MovieController extends Controller
         $movie = Movie::find($id);
         $movie->resolution = $data['resolution'];
         $movie->tags = $data['tags'];
+        $movie->trailer = $data['trailer'];
         $movie->thoiluong = $data['thoiluong'];
         $movie->phude = $data['phude'];
         $movie->title = $data['title'];

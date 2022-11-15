@@ -48,18 +48,19 @@
                               <a class="halim-thumb" href="{{route('movie',$hot->slug)}}" title="{{$hot->title}}">
                                  <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$hot->image)}}" alt="{{$hot->title}}" title="Đại Thánh Vô Song"></figure>
                                  <span class="status">
-   
                                     @if($hot->resolution==0)
-                                          HD
-                                    @elseif($hot->resolution==1)
-                                          SD
-                                    @elseif($hot->resolution==2)
-                                          HDCam
-                                    @elseif($hot->resolution==3)
-                                          Cam
-                                    @else
-                                          FullHD
-                                    @endif
+                                    HD
+                                 @elseif($hot->resolution==1)
+                                       SD
+                                 @elseif($hot->resolution==2)
+                                       HDCam
+                                 @elseif($hot->resolution==3)
+                                       Cam
+                                 @elseif($hot->resolution==4)
+                                       FullHD
+                                 @else
+                                       Trailer
+                                 @endif
                                  </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
                                     @if($hot->phude==0)
                                  Phụ đề
@@ -107,17 +108,19 @@
                            <a class="halim-thumb" href="chitiet.php">
                               <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$mov->image)}}" alt="error" title="{{$mov->title}}"></figure>
                               <span class="status">
-                                 @if( $mov->resolution==0)
-                                          HD
-                                    @elseif( $mov->resolution==1)
-                                          SD
-                                    @elseif( $mov->resolution==2)
-                                          HDCam
-                                    @elseif( $mov->resolution==3)
-                                          Cam
-                                    @else
-                                          FullHD
-                                    @endif
+                                 @if($mov->resolution==0)
+                                       HD
+                                 @elseif($mov->resolution==1)
+                                       SD
+                                 @elseif($mov->resolution==2)
+                                       HDCam
+                                 @elseif($mov->resolution==3)
+                                       Cam
+                                 @elseif($mov->resolution==4)
+                                       FullHD
+                                 @else
+                                       Trailer
+                                 @endif
                               </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
                                  @if($mov->phude==0)
                                  Phụ đề
