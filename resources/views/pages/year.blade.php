@@ -49,8 +49,14 @@
                                  
                                  @if($mov->phude==0)
                                  Phụ đề
+                                    @if($mov->season!=0)
+                                       Season: {{$mov->season}}
+                                    @endif
                                  @else
-                                       Thuyết minh
+                                 Thuyết minh
+                                    @if($mov->season!=0)
+                                       Season: {{$mov->season}}
+                                    @endif
                                  @endif
                               </span> 
                               <div class="icon_overlay"></div>

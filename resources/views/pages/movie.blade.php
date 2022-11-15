@@ -60,7 +60,10 @@
                                  @endif
                                  </span></li>
                                  
-                                 <li class="list-info-group-item"><span>Thời lượng</span> {{$movie->thoiluong}}</li>
+                                 <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->thoiluong}}</li>
+                                 @if($movie->season!=0)
+                                 <li class="list-info-group-item"><span>Season</span> : {{$movie->season}}</li>
+                                    @endif
                                  <li class="list-info-group-item"><span>Thể loại</span> : 
                                     <a href="{{route('genre',$movie->genre->slug)}}" rel="category tag">{{$movie->genre->title}}</a>
                                  </li>
