@@ -123,6 +123,22 @@
                            </article>
                         </div>
                      </div>
+
+                     {{-- comment facebook --}}
+                     <div class="section-bar clearfix">
+                        <h2 class="section-title"><span style="color:#ffed4d">Bình luận</span></h2>
+                     </div>
+                     <div class="entry-content htmlwrap clearfix">
+                        @php
+                           $current_url = Request::url();
+                        @endphp
+                        <div class="video-item halim-entry-box">
+                           <article id="post-38424" class="item-content">
+                           <div class="fb-comments" data-href="{{$current_url}}" data-width="100%" data-numposts="10"></div>
+                           </article>
+                        </div>
+                     </div>
+
                      <div class="section-bar clearfix">
                         <h2 class="section-title"><span style="color:#ffed4d">Trailer Phim</span></h2>
                      </div>
