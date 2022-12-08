@@ -207,7 +207,7 @@
                var click_text = $(this).text().split('|')
 
                $('#timkiem').val($.trim(click_text[0]));
-               $("$result").html('');
+               $("#result").html('');
                $('#result').css('display','none');
             });
          })
