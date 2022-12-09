@@ -38,7 +38,7 @@
          width: 100%;
          }
       </style>
-      <style>#header .site-title {background: url(https://motphimtv.info/motphimtv.png) no-repeat top left;background-size: contain;text-indent: -9999px;}</style>
+      <style>#header .site-title {background: url(https://motchill.tv/motchill.png?v1.0.2) no-repeat top left;background-size: contain;text-indent: -9999px;}</style>
    </head>
    <body class="home blog halimthemes halimmovies" data-masonry="">
       <header id="header">
