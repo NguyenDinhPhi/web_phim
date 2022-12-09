@@ -12,6 +12,25 @@ use DB;
 
 class IndexController extends Controller
 {
+    public function timkiem()
+    {
+        if(isset($_GET['search'])){
+            $search = $_GET['search'];
+
+         $category = Category::orderBy('position','ASC')->where('status',1)->get();
+         $genre = Genre::orderBy('id','DESC')->get();
+         $country = Country::orderBy('id','DESC')->get();
+         $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('ngaycapnhat','DESC')->take(30)->get();
+         $phimhot_trailer = Movie::where('resolution',5)->where('status',1)->orderBy('ngaycapnhat','DESC')->take(10)->get();
+         
+         $movie = Movie::where('title','LIKE','%'.$search.'%')->orderBy('ngaycapnhat','DESC')->paginate(40);
+    	 
+         return view('pages.timkiem', compact('category','genre','country','search','movie','phimhot_sidebar','phimhot_trailer'));
+        }else{
+            return redirect()->to('/');
+        }
+       
+    }
     public function home(){
         $phimhot = Movie::where('phim_hot',1)->where('status',1)->orderBy('ngaycapnhat','DESC')->get();
         $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('ngaycapnhat','DESC')->take(30)->get();

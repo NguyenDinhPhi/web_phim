@@ -63,8 +63,10 @@
                         </style>
                         <div class="form-group form-timkiem">
                            <div class="input-group col-xs-12">
-                              
-                              <input type="text" name="search" id="timkiem" class="form-control" placeholder="Tìm kiếm phim ...." autocomplete="off" require>
+                              <form action="{{route('tim-kiem')}}" method="GET">
+                                 <input type="text" name="search" id="timkiem" class="form-control" placeholder="Tìm kiếm phim ...." autocomplete="off" require>
+                                 <button class="btn btn-primary">Tìm kiếm</button>
+                              </form>
                            </div>
 
                         </div> 
