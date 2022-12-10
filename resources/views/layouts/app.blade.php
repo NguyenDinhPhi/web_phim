@@ -177,7 +177,7 @@
             document.getElementById('convert_slug').value = slug;
         }
 
-    </>
+    </script>
     <script type="text/javascript">
         $('.order_position').sortable({
             placeholder : 'ui-state-highlight',
