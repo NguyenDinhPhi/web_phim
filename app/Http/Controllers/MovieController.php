@@ -8,6 +8,7 @@ use App\Models\Movie_Genre;
 use App\Models\Category;
 use App\Models\Genre;
 use App\Models\Country;
+use App\Models\Episode;
 use Carbon\Carbon;
 use Storage;
 use File;
@@ -160,6 +161,7 @@ class MovieController extends Controller
         $movie = new Movie();
         $movie->title = $data['title'];
         $movie->trailer = $data['trailer'];
+        $movie->sotap = $data['sotap'];
         $movie->tags = $data['tags'];
         $movie->thoiluong = $data['thoiluong'];
         $movie->resolution = $data['resolution'];
@@ -170,10 +172,13 @@ class MovieController extends Controller
         $movie->description = $data['description'];
         $movie->status = $data['status'];
         $movie->category_id = $data['category_id'];
+        $movie->thuocphim = $data['thuocphim'];
         
         $movie->country_id = $data['country_id'];
         $movie->ngaytao = Carbon::now('Asia/Ho_Chi_Minh');
         $movie->ngaycapnhat = Carbon::now('Asia/Ho_Chi_Minh');
+
+        //them phim
         foreach($data['genre'] as $key => $gen){
             $movie->genre_id = $gen[0];
         }
@@ -246,10 +251,11 @@ class MovieController extends Controller
         $movie->slug = $data['slug'];
         $movie->name_eng = $data['name_eng'];
         $movie->phim_hot = $data['phim_hot'];
+        $movie->sotap = $data['sotap'];
         $movie->description = $data['description'];
         $movie->status = $data['status'];
         $movie->category_id = $data['category_id'];
-       
+        $movie->thuocphim = $data['thuocphim'];
         $movie->country_id = $data['country_id'];
         $movie->ngaycapnhat = Carbon::now('Asia/Ho_Chi_Minh');
         $get_image = $request->file('image');
@@ -289,8 +295,10 @@ class MovieController extends Controller
         }
         //xoa the loai
         Movie_Genre::whereIn('movie_id',[$movie->id])->delete();
-        $movie->delete();
-
+       
+        //xoa tap phim
+        Eposide::whereIn('movie_id',[$movie->id])->delete();
+        // $movie->delete();
         return redirect()->back();
     }
 }

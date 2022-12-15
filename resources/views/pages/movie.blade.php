@@ -5,7 +5,15 @@
                <div class="panel-heading">
                   <div class="row">
                      <div class="col-xs-6">
-                        <div class="yoast_breadcrumb hidden-xs"><span><span><a href="{{route('category',[$movie->category->slug])}}">{{$movie->category->title}}</a> » <span><a href="{{route('country',[$movie->country->slug])}}">{{$movie->country->title}}</a> » <span class="breadcrumb_last" aria-current="page">{{$movie->title}}</span></span></span></span></div>
+                        <div class="yoast_breadcrumb hidden-xs"><span><span><a href="{{route('category',[$movie->category->slug])}}">{{$movie->category->title}}</a> »
+                           <span>
+                              <a href="{{route('country',[$movie->country->slug])}}">{{$movie->country->title}}</a> » 
+
+                                 @foreach($movie->movie_genre as $gen)
+                                    <a href="{{route('genre',[$gen->slug])}}">{{$gen->title}}</a> » 
+                                 @endforeach
+
+                              <span class="breadcrumb_last" aria-current="page">{{$movie->title}}</span></span></span></span></div>
                      </div>
                   </div>
                </div>
@@ -29,15 +37,21 @@
                         <div class="movie_info col-xs-12">
                            <div class="movie-poster col-md-3">
                               <img class="movie-thumb" src="{{asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->title}}">
-                              @if($movie->resolution!=5)
-                                 <div class="bwa-content">
-                                    <div class="loader"></div>
-                                    <a href="{{route('watch')}}" class="bwac-btn">
-                                    <i class="fa fa-play"></i>
-                                    </a>
-                                 </div>
-                              @else
-                              <a href="#watch_trailer"  style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer </a>
+                              
+                                 @if($movie->resolution!=5)
+
+                                    @if($episode_current_list_count>0)
+                                       <div class="bwa-content">
+                                          <div class="loader"></div>
+                                          
+                                          <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_tapdau->episode)}}" class="bwac-btn">
+                                          <i class="fa fa-play"></i>
+                                          </a>
+                                       </div>
+                                    @endif
+                                 @else
+                                 <a href="#watch_trailer"  style="display: block;" class="btn btn-primary watch_trailer">Xem Trailer </a>
+                                 
                               @endif
                            </div>
                            <div class="film-poster col-md-9">
@@ -71,9 +85,21 @@
                               </li>
                                  
                                  <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->thoiluong}}</li>
-                                 @if($movie->season!=0)
-                                 <li class="list-info-group-item"><span>Season</span> : {{$movie->season}}</li>
+                                 <li class="list-info-group-item"><span>Tập phim</span> : 
+                                 @if($movie->thuocphim=='phimbo')
+                                    {{$episode_current_list_count}}/{{$movie->sotap}} - 
+                                    @if($episode_current_list_count==$movie->sotap)
+                                       Hoàn thành
+                                    @else
+                                       Đang cập Nhật
                                     @endif
+                                 @else
+                                 FullHD
+                                 HD
+
+                                 @endif
+                                 </li>
+                                 
                                  <li class="list-info-group-item"><span>Thể loại</span> : 
                                     @foreach($movie->movie_genre as $gen)
                                     <a href="{{route('genre',$gen->slug)}}" rel="category tag">{{$gen->title}}</a>
@@ -84,6 +110,25 @@
                                  </li>
                                  <li class="list-info-group-item"><span>Quốc gia</span> : 
                                     <a href="{{route('country',$movie->country->slug)}}" rel="tag">{{$movie->country->title}}</a>
+                                 </li>
+                                 <li class="list-info-group-item"><span>Tập phim mới nhất</span> :
+                                    @if($episode_current_list_count>0)
+                                       
+                                          @if($movie->thuocphim=='phimbo')
+                                             
+                                                @foreach($episode as $key =>$ep)
+                                                   <a href="{{url('xem-phim/'.$ep->movie->slug.'/tap-'.$ep->episode)}}" rel="tag">Tập {{$ep->episode}}</a>
+                                                @endforeach
+                                             
+                                          @elseif($movie->thuocphim=='phimle')
+                                          @foreach($episode as $key =>$ep_le)
+                                          <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode)}}" rel="tag">$ep_le->episode</a>
+                                          
+                                          @endforeach
+                                    @endif
+                                    @else
+                                    Đang cập nhật
+                                    @endif
                                  </li>
                                  
                               </ul>
