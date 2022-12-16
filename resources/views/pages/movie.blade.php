@@ -122,7 +122,7 @@
                                              
                                           @elseif($movie->thuocphim=='phimle')
                                           @foreach($episode as $key =>$ep_le)
-                                          <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode)}}" rel="tag">$ep_le->episode</a>
+                                          <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode)}}" rel="tag">{{$ep_le->episode}}</a>
                                           
                                           @endforeach
                                     @endif

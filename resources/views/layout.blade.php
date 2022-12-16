@@ -70,7 +70,7 @@
                            </div>
 
                         </div> 
-                           <ul class="list-group" id="result" style="display: none;" ">
+                           <ul class="list-group" id="result" style="display: none;" >
 
                            </ul>
                      </div>
