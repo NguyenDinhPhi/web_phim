@@ -297,8 +297,8 @@ class MovieController extends Controller
         Movie_Genre::whereIn('movie_id',[$movie->id])->delete();
        
         //xoa tap phim
-        Eposide::whereIn('movie_id',[$movie->id])->delete();
-        // $movie->delete();
+        Episode::whereIn('movie_id',[$movie->id])->delete();
+         $movie->delete();
         return redirect()->back();
     }
 }
